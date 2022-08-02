@@ -3,16 +3,16 @@ from fastapi import APIRouter, HTTPException
 
 from shortipy.entities.short_url import ShortURL
 from shortipy.entities.app_error import AppError
+from shortipy.infra.database.repositories.shorturl_redis_repository import ShortURLsRedisRepository
 from shortipy.usecases.create_shorturl_usecase import CreateShortURLUseCase
-from shortipy.tests.fixtures.repositories.short_url_repository_in_memory import ShortURLRepositoryInMemory
 
 router = APIRouter(
     tags=['short_urls'],
-    responses={ 400 : { 'description' : 'Invalid url!' }}
+    responses={400: {'description': 'Invalid url!'}}
 )
 
-fakeShortURLRepo = ShortURLRepositoryInMemory()
-createShortURLUseCase = CreateShortURLUseCase(fakeShortURLRepo)
+redisShortURLsRepo = ShortURLsRedisRepository()
+createShortURLUseCase = CreateShortURLUseCase(redisShortURLsRepo)
 
 
 @dataclass
@@ -20,7 +20,7 @@ class CreateShortURLPayload:
     url: str
 
 
-@router.post('/', response_model=ShortURL, status_code=201)
+@router.post('/', status_code=201)
 async def create_short_url(payload: CreateShortURLPayload):
     '''Creates a short url'''
     try:
