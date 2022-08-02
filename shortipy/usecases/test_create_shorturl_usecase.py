@@ -1,10 +1,10 @@
 from pytest import raises
 
-from entities.app_error import AppError
-from usecases.create_shorturl_usecase import CreateShortURLUseCase
+from shortipy.entities.app_error import AppError
+from shortipy.usecases.create_shorturl_usecase import CreateShortURLUseCase
 
-from tests.fixtures.repositories.short_url_repository_in_memory import ShortURLRepositoryInMemory
-from tests.fixtures.fake_short_url import make_fake_shortURL
+from shortipy.tests.fixtures.repositories.short_url_repository_in_memory import ShortURLRepositoryInMemory
+from shortipy.tests.fixtures.fake_short_url import make_fake_shortURL
 
 
 createShortURLUseCase = CreateShortURLUseCase(ShortURLRepositoryInMemory())
