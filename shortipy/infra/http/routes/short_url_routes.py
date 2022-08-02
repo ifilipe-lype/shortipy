@@ -24,7 +24,6 @@ class CreateShortURLPayload:
 async def create_short_url(payload: CreateShortURLPayload):
     '''Creates a short url'''
     try:
-        short_url = await createShortURLUseCase.execute(url=payload.url)
-        return short_url
+        return await createShortURLUseCase.execute(url=payload.url)
     except AppError as e:
         raise HTTPException(status_code=e.code, detail=e.msg)
