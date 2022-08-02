@@ -1,5 +1,5 @@
-from entities.short_url import ShortURL
-from repositories.short_url_repository import ShortURLsRepository
+from shortipy.entities.short_url import ShortURL
+from shortipy.repositories.short_url_repository import ShortURLsRepository
 
 class CreateShortURLUseCase:
 
