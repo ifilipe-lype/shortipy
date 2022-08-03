@@ -20,7 +20,7 @@ class CreateShortURLPayload:
     url: str
 
 
-@router.post('/', status_code=201)
+@router.post('/', response_model=ShortURL, status_code=201)
 async def create_short_url(payload: CreateShortURLPayload):
     '''Creates a short url'''
     try:
