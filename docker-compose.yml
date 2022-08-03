@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  redis:
+    container_name: shortipy-redis
+    image: redis:latest
+    ports:
+    - 6379:6379
+    volumes:
+    - redis-data/etc/data
+    networks:
+    - redis-net
+    environment:
+      - REDIS_PASSWORD:$REDIS_PASSWORD
+    command: >
+      --requirepass ${REDIS_PASSWORD}
+
+networks:
+  redis-net: {}
