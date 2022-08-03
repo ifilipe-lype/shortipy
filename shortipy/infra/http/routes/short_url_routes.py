@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import os
 from fastapi import APIRouter, HTTPException
 
 from shortipy.entities.short_url import ShortURL
@@ -24,6 +25,9 @@ class CreateShortURLPayload:
 async def create_short_url(payload: CreateShortURLPayload):
     '''Creates a short url'''
     try:
-        return await createShortURLUseCase.execute(url=payload.url)
+        short_url = await createShortURLUseCase.execute(url=payload.url)
+        short_url.access_key = f"{os.environ.get('REDIRECTION_BASE_URL')}/{short_url.access_key}"
+
+        return short_url
     except AppError as e:
         raise HTTPException(status_code=e.code, detail=e.msg)
