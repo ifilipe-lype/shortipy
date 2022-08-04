@@ -5,9 +5,12 @@ from shortipy.entities.short_url import ShortURL
 
 class ShortURLRepositoryInMemory(ShortURLsRepository):
 
-    data = []
+    data = {}
 
     async def create(self, short_url: ShortURL):
-        self.data.append(short_url)
+        self.data[short_url.access_key] = short_url;
 
         return short_url
+    
+    async def getByAccessKey(self, access_key: str) -> ShortURL:
+        return self.data.get(access_key)
