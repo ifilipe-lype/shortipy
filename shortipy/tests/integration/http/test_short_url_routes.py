@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from shortipy.tests.fixtures.fake_short_url import make_fake_shortURL
 from shortipy.tests.fixtures.repositories.short_url_repository_in_memory import ShortURLRepositoryInMemory
 
-from ..server import app
+from shortipy.infra.http.server import app
 
 
 class TestShortURLRoutes:
