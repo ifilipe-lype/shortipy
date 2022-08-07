@@ -1,8 +1,9 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from shortipy.infra.http.server import app
 
-
+@pytest.mark.integration
 def test_ping_pong():
     client = TestClient(app)
 
