@@ -19,6 +19,7 @@ class ShortURL(BaseModel):
         super().__init__(**data)
         __pydantic_self__.id = data.get('id', uuid4())
         __pydantic_self__.access_key = data.get('access_key', random_str(12))
+        __pydantic_self__.target_url = data.get('target_url', __pydantic_self__.target_url)
         __pydantic_self__.created_at = data.get('created_at', datetime.now())
 
     @validator('target_url')
