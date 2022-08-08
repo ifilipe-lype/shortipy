@@ -8,6 +8,7 @@ app = FastAPI()
 
 @app.get('/ping')
 async def ping_pong():
+    '''Check server readiness'''
     return { 'msg': 'pong'}
 
 
