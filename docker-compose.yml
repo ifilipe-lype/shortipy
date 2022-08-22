@@ -1,19 +1,33 @@
 version: "3.8"
 
 services:
-  redis:
-    container_name: shortipy-redis
+  api:
+    container_name: shortitpy-api
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:80
+    volumes:
+      - .:/usr/src/shortitpy
+    depends_on:
+      - shortitpy-redis
+    networks:
+      - redis-network
+
+  shortitpy-redis:
+    container_name: shortitpy-redis
     image: redis:latest
     ports:
-    - 6379:6379
+      - 6379:$REDIS_PORT
     volumes:
-    - redis-data/etc/data
+      - redis-data/etc/data
     networks:
-    - redis-net
+      - redis-network
     environment:
       - REDIS_PASSWORD:$REDIS_PASSWORD
     command: >
       --requirepass ${REDIS_PASSWORD}
 
 networks:
-  redis-net: {}
+  redis-network: {}
