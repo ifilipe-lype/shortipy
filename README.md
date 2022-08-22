@@ -32,8 +32,9 @@ docker-compose up --build -d
 uvicorn shortitpy.infra.http.server:app --reload
 ```
 
-## TESTS
+## TESTS (DEV)
 1. Everything is setup for you, just run:
 ```bash
-ptw
+docker exec -it shortitpy-api ptw shortitpy
+docker exec -it shortitpy-api pytest shortitpy --integration
 ```
