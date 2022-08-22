@@ -4,11 +4,11 @@ from dataclasses import dataclass
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import RedirectResponse
 
-from shortipy.entities.short_url import ShortURL
-from shortipy.entities.app_error import AppError
-from shortipy.infra.database.repositories.shorturl_redis_repository import ShortURLsRedisRepository
-from shortipy.usecases.create_shorturl_usecase import CreateShortURLUseCase
-from shortipy.usecases.get_shorturl_by_key_usecase import GetShortURLByKeyUsecase
+from shortitpy.entities.short_url import ShortURL
+from shortitpy.entities.app_error import AppError
+from shortitpy.infra.database.repositories.shorturl_redis_repository import ShortURLsRedisRepository
+from shortitpy.usecases.create_shorturl_usecase import CreateShortURLUseCase
+from shortitpy.usecases.get_shorturl_by_key_usecase import GetShortURLByKeyUsecase
 
 router = APIRouter(
     tags=['short_urls']

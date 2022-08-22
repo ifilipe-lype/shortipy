@@ -1,11 +1,11 @@
 from os import access
 from pytest import raises
 
-from shortipy.entities.app_error import AppError
-from shortipy.tests.fixtures.fake_short_url import make_fake_shortURL
-from shortipy.usecases.create_shorturl_usecase import CreateShortURLUseCase
-from shortipy.usecases.get_shorturl_by_key_usecase import GetShortURLByKeyUsecase
-from shortipy.tests.fixtures.repositories.short_url_repository_in_memory import ShortURLRepositoryInMemory
+from shortitpy.entities.app_error import AppError
+from shortitpy.tests.fixtures.fake_short_url import make_fake_shortURL
+from shortitpy.usecases.create_shorturl_usecase import CreateShortURLUseCase
+from shortitpy.usecases.get_shorturl_by_key_usecase import GetShortURLByKeyUsecase
+from shortitpy.tests.fixtures.repositories.short_url_repository_in_memory import ShortURLRepositoryInMemory
 
 getShortURLByKeyUsecase = GetShortURLByKeyUsecase(ShortURLRepositoryInMemory())
 createShortURLUseCase = CreateShortURLUseCase(ShortURLRepositoryInMemory())

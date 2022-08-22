@@ -2,8 +2,8 @@ import pytest
 
 from fastapi.testclient import TestClient
 
-from shortipy.tests.fixtures.fake_short_url import make_fake_shortURL
-from shortipy.infra.http.server import app
+from shortitpy.tests.fixtures.fake_short_url import make_fake_shortURL
+from shortitpy.infra.http.server import app
 
 
 @pytest.mark.integration

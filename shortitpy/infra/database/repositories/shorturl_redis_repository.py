@@ -3,8 +3,8 @@ import os
 import redis
 from dotenv import load_dotenv
 
-from shortipy.entities.short_url import ShortURL
-from shortipy.repositories.short_url_repository import ShortURLsRepository
+from shortitpy.entities.short_url import ShortURL
+from shortitpy.repositories.short_url_repository import ShortURLsRepository
 
 
 load_dotenv()

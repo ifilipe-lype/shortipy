@@ -4,9 +4,9 @@ from datetime import datetime
 
 from pydantic import BaseModel, validator, UUID4
 
-from shortipy.entities.app_error import AppError
-from shortipy.helpers.url_validation import is_valid_url
-from shortipy.helpers.gen_random import random_str
+from shortitpy.entities.app_error import AppError
+from shortitpy.helpers.url_validation import is_valid_url
+from shortitpy.helpers.gen_random import random_str
 
 
 class ShortURL(BaseModel):
