@@ -1,6 +1,6 @@
 from faker import Faker
 
-from shortipy.helpers.gen_random import random_str
+from shortitpy.helpers.gen_random import random_str
 
 def make_fake_shortURL():
     fake = Faker()

@@ -1,15 +1,15 @@
-# shortipy
+# shortitpy
 A URL shortener restfull api
 
 
 ## Set up
 1. clone this repo
 ```bash
-git clone git@github.com:ifilipe-lype/shortipy.git
+git clone git@github.com:ifilipe-lype/shortitpy.git
 ```
 2. setup the enviroment
 ```bash
-cd shortipy
+cd shortitpy
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -29,7 +29,7 @@ docker-compose up --build -d
 ## Run Development Server
 1. The api is fastapi based and using uvicorn for dealing with async stuffs
 ```bash
-uvicorn shortipy.infra.http.server:app --reload
+uvicorn shortitpy.infra.http.server:app --reload
 ```
 
 ## TESTS

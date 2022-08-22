@@ -1,6 +1,6 @@
 from venv import create
-from shortipy.repositories.short_url_repository import ShortURLsRepository
-from shortipy.entities.short_url import ShortURL
+from shortitpy.repositories.short_url_repository import ShortURLsRepository
+from shortitpy.entities.short_url import ShortURL
 
 
 class ShortURLRepositoryInMemory(ShortURLsRepository):

@@ -1,10 +1,10 @@
 from uuid import UUID
 from datetime import datetime
 
-from shortipy.entities.short_url import ShortURL
-from shortipy.entities.app_error import AppError
+from shortitpy.entities.short_url import ShortURL
+from shortitpy.entities.app_error import AppError
 
-from shortipy.tests.fixtures.fake_short_url import make_fake_shortURL
+from shortitpy.tests.fixtures.fake_short_url import make_fake_shortURL
 
 class Test_ShortURL:
     
