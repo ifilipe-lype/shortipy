@@ -29,7 +29,7 @@ async def create_short_url(payload: CreateShortURLPayload):
     '''Creates a short url'''
     try:
         short_url = await createShortURLUseCase.execute(url=payload.url)
-        short_url.access_key = f"{os.environ.get('REDIRECTION_BASE_URL')}/{short_url.access_key}"
+        short_url.access_url = f"{os.environ.get('REDIRECTION_BASE_URL')}/{short_url.access_key}"
 
         return short_url
     except AppError as e:
