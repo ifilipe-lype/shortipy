@@ -17,8 +17,6 @@ services:
     image: redis:latest
     ports:
       - "${REDIS_PORT}:6379"
-    volumes:
-      - redis-data/etc/data
     networks:
       - redis-network
     environment:
