@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Running tests
           command: |
-            docker-compose up -d
+            docker-compose -f docker-compose.dev.yml up -d
             docker exec -it api pytest shortitpy-api
             docker exec -it api pytest shortitpy-api --integration
             docker-compose down

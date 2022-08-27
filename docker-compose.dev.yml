@@ -5,8 +5,11 @@ services:
     container_name: shortitpy-api
     build:
       context: .
+      dockerfile: Dockerfile.dev
     ports:
       - 80:80
+    volumes:
+      - .:/usr/src/shortitpy
     depends_on:
       - shortitpy-redis
     networks:
@@ -17,8 +20,7 @@ services:
     image: redis:latest
     ports:
       - "${REDIS_PORT}:6379"
-    volumes:
-      - redis-data/etc/data
+
     networks:
       - redis-network
     environment:
