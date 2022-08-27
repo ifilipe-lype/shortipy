@@ -19,13 +19,13 @@ services:
     container_name: shortitpy-redis
     image: redis:latest
     ports:
-      - 6379:$REDIS_PORT
+      - '${REDIS_PORT}:6379'
     volumes:
       - redis-data/etc/data
     networks:
       - redis-network
     environment:
-      - REDIS_PASSWORD:$REDIS_PASSWORD
+      - REDIS_PASSWORD:${REDIS_PASSWORD}
     command: >
       --requirepass ${REDIS_PASSWORD}
 
