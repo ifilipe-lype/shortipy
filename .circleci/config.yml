@@ -12,7 +12,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: false
+          docker_layer_caching: true # should not be important
+          version: 20.10.12
 
       - run:
           name: Installing dependencies...
