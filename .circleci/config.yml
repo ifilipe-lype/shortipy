@@ -1,10 +1,13 @@
 version: 2.1
 
+base_config: &base_config
+  working_directory: ~/project
+  docker:
+    - image: cimg/base:2022.08
+
 jobs:
   build:
-    working_directory: ~/project
-    docker:
-      - image: cimg/base:2022.08
+    <<: *base_config
 
     steps:
       - checkout
@@ -23,13 +26,12 @@ jobs:
             - ./
 
   tests:
-    docker:
-      - image: cimg/base:2022.08
+    <<: *base_config
 
     steps:
       # Start with the initial build
       - attach_workspace:
-          at: ~/
+          at: ~/project
 
       - run:
           name: Gathering .env file data
