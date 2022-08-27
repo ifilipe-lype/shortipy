@@ -12,9 +12,24 @@ jobs:
           docker_layer_caching: false
 
       - run:
-          name: Installing dependencies
+          name: Installing dependencies...
           command: |
             sudo apt-get update && sudo apt-get install python3-pip
+
+      # Store project files for the next job
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  tests:
+    docker:
+      - image: cimg/base:2022.08
+
+    steps:
+      # Start with the initial build
+      - attach_workspace:
+          at: ~/
 
       - run:
           name: Gathering .env file data
@@ -27,9 +42,16 @@ jobs:
             echo SHORT_URL_TTL=${SHORT_URL_TTL} >> .env
 
       - run:
-          name: Running tests
+          name: Running tests...
           command: |
-            docker-compose -f docker-compose.dev.yml up -d
-            docker exec -it api pytest shortitpy-api
-            docker exec -it api pytest shortitpy-api --integration
+            docker-compose -f docker-compose.dev.yml run shortitpy-api pytest shortitpy
+            docker-compose -f docker-compose.dev.yml run shortitpy-api pytest shortitpy --integration
             docker-compose down
+
+workflows:
+  full:
+    jobs:
+      - build
+      - tests:
+          requires:
+            - build
