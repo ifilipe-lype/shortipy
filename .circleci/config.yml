@@ -5,18 +5,32 @@ jobs:
     working_directory: ~/project
     docker:
       - image: docker:17.05.0-ce-git
+
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
+
       - run:
-          name: Install dependencies
+          name: Installing dependencies
           command: |
-            apk add --no-cache py-pip=9.0.0-r1
-            pip install docker-compose==1.15.0
+            apk add --no-cache py-pip
+            pip install docker-compose
+
       - run:
-         name: Running tests
-         command: |
+          name: Gathering .env file data
+          command: |
+            echo REDIS_NETWORK_NAME=${REDIS_NETWORK_NAME} >> .env
+            echo REDIS_PASSWORD=${REDIS_PASSWORD} >> .env
+            echo REDIS_PORT=${REDIS_PORT} >> .env
+            echo REDIS_DB=${REDIS_DB} >> .env
+            echo REDIRECTION_BASE_URL=${REDIRECTION_BASE_URL} >> .env
+            echo SHORT_URL_TTL=${SHORT_URL_TTL} >> .env
+
+      - run:
+          name: Running tests
+          command: |
             docker-compose up -d
-            docker exec -it api pytest shortitpy
-            docker exec -it api pytest shortitpy --integration
+            docker exec -it api pytest shortitpy-api
+            docker exec -it api pytest shortitpy-api --integration
+            docker-compose down
