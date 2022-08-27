@@ -39,10 +39,10 @@ jobs:
             docker-compose -f docker-compose.dev.yml down
 
       # Store shortitpy files for the next job
-      - persist_to_workspace:
-          root: ~/shortitpy
-          paths:
-            - ./
+      # - persist_to_workspace:
+      #     root: ~/shortitpy
+      #     paths:
+      #       - ./
 
   # tests:
   #   <<: *base_config
