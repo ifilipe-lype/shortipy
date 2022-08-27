@@ -33,7 +33,8 @@ jobs:
       - run:
           name: Running tests...
           command: |
-            docker compose -f docker-compose.dev.yml run shortitpy-api pytest ./test_hello.py
+            docker compose -f docker-compose.dev.yml run shortitpy-api pwd
+            docker compose -f docker-compose.dev.yml run shortitpy-api ls
             docker compose -f docker-compose.dev.yml run shortitpy-api pytest ./shortitpy
             docker compose -f docker-compose.dev.yml run shortitpy-api pytest ./shortitpy --integration
             docker-compose -f docker-compose.dev.yml down
