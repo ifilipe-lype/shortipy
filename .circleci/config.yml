@@ -1,7 +1,7 @@
 version: 2.1
 
 base_config: &base_config
-  working_directory: ~/shortitpy
+  working_directory: ~/project
   docker:
     - image: cimg/base:2022.08
 
@@ -33,6 +33,7 @@ jobs:
       - run:
           name: Running tests...
           command: |
+            pwd
             docker-compose -f docker-compose.dev.yml up -d
             docker exec -it shortitpy-api pytest shortitpy
             docker exec -it shortitpy-api pytest shortitpy --integration
@@ -40,7 +41,7 @@ jobs:
 
       # Store shortitpy files for the next job
       # - persist_to_workspace:
-      #     root: ~/shortitpy
+      #     root: ~/project
       #     paths:
       #       - ./
 
@@ -50,7 +51,7 @@ jobs:
   #   steps:
   #     # Start with the initial build
   #     - attach_workspace:
-  #         at: ~/shortitpy
+  #         at: ~/project
 
   #     - run:
   #         name: Gathering .env file data
