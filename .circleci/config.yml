@@ -46,6 +46,7 @@ jobs:
       - run:
           name: Running tests...
           command: |
+            sudo dockerd
             docker-compose -f docker-compose.dev.yml up -d
             docker-compose -f docker-compose.dev.yml run shortitpy-api pytest shortitpy
             docker-compose -f docker-compose.dev.yml run shortitpy-api pytest shortitpy --integration
