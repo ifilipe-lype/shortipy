@@ -1,7 +1,7 @@
-version: "3.8"
+version: "3"
 
 services:
-  api:
+  shortitpy-api:
     container_name: shortitpy-api
     build:
       context: .
@@ -19,7 +19,7 @@ services:
     container_name: shortitpy-redis
     image: redis:latest
     ports:
-      - '${REDIS_PORT}:6379'
+      - "${REDIS_PORT}:6379"
     volumes:
       - redis-data/etc/data
     networks:
