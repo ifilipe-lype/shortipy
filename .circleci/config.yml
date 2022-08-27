@@ -34,8 +34,8 @@ jobs:
           name: Running tests...
           command: |
             docker-compose -f docker-compose.dev.yml up -d
-            docker exec -it shortitpy-api pytest shortitpy
-            docker exec -it shortitpy-api pytest shortitpy --integration
+            docker exec -it shortitpy-api pytest
+            docker exec -it shortitpy-api pytest --integration
             docker-compose -f docker-compose.dev.yml down
 
       # Store shortitpy files for the next job
