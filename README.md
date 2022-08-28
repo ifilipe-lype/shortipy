@@ -1,5 +1,5 @@
 # shortitpy
-A URL shortener restfull api built on top of fastapi.
+A URL shortener restfull api built on top of fastapi
 
 
 ## Set up
