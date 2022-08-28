@@ -25,7 +25,10 @@ pip install -r requirements.txt
 ```bash
 docker-compose up --build -d
 ```
-
+1. Or if you want to run the dev version (in watch mode)
+```bash
+docker-compose -f docker-compose.dev.yml up -d
+```
 ## Run Development Server
 1. The api is fastapi based and using uvicorn for dealing with async stuffs
 ```bash

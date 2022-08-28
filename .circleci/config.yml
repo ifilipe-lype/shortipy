@@ -1,0 +1,41 @@
+version: 2.1
+
+base_config: &base_config
+  working_directory: ~/project
+  docker:
+    - image: cimg/base:2022.08
+
+jobs:
+  tests:
+    <<: *base_config
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+          version: 20.10.12
+
+      - run:
+          name: Building testing .env file ...
+          command: |
+            echo REDIS_NETWORK_NAME=${REDIS_NETWORK_NAME} >> .env
+            echo REDIS_PASSWORD=${REDIS_PASSWORD} >> .env
+            echo REDIS_PORT=${REDIS_PORT} >> .env
+            echo REDIS_DB=${REDIS_DB} >> .env
+            echo REDIRECTION_BASE_URL=${REDIRECTION_BASE_URL} >> .env
+            echo SHORT_URL_TTL=${SHORT_URL_TTL} >> .env
+
+      - run:
+          name: Running unit tests ...
+          command: |
+            docker-compose run shortitpy-api pytest shortitpy
+
+      - run:
+          name: Running integration tests ...
+          command: |
+            docker-compose run shortitpy-api pytest shortitpy --integration
+
+workflows:
+  full:
+    jobs:
+      - tests
