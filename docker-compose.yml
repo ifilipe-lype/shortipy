@@ -10,6 +10,15 @@ services:
       - 80:80
     depends_on:
       - shortitpy-redis
+
+    environment:
+      - REDIS_NETWORK_NAME=${REDIS_NETWORK_NAME}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_DB=${REDIS_DB}
+      - REDIRECTION_BASE_URL=${REDIRECTION_BASE_URL}
+      - SHORT_URL_TTL=${SHORT_URL_TTL}
+
     networks:
       - redis-network
 
