@@ -6,7 +6,7 @@ base_config: &base_config
     - image: cimg/base:2022.08
 
 jobs:
-  build:
+  tests:
     <<: *base_config
 
     steps:
@@ -16,12 +16,7 @@ jobs:
           version: 20.10.12
 
       - run:
-          name: Installing dependencies...
-          command: |
-            sudo apt-get update && sudo apt-get install python3-pip
-
-      - run:
-          name: Building .env file
+          name: Building testing .env file ...
           command: |
             echo REDIS_NETWORK_NAME=${REDIS_NETWORK_NAME} >> .env
             echo REDIS_PASSWORD=${REDIS_PASSWORD} >> .env
@@ -31,38 +26,16 @@ jobs:
             echo SHORT_URL_TTL=${SHORT_URL_TTL} >> .env
 
       - run:
-          name: Running tests...
+          name: Running unit tests ...
           command: |
             docker-compose run shortitpy-api pytest shortitpy
+
+      - run:
+          name: Running integration tests ...
+          command: |
             docker-compose run shortitpy-api pytest shortitpy --integration
-            docker-compose down
-
-      # Store shortitpy files for the next job
-      # - persist_to_workspace:
-      #     root: ~/project
-      #     paths:
-      #       - ./
-
-  # tests:
-  #   <<: *base_config
-
-  #   steps:
-  #     # Start with the initial build
-  #     - attach_workspace:
-  #         at: ~/project
-
-  #     - run:
-  #         name: Gathering .env file data
-  #         command: |
-  #           echo REDIS_NETWORK_NAME=${REDIS_NETWORK_NAME} >> .env
-  #           echo REDIS_PASSWORD=${REDIS_PASSWORD} >> .env
-  #           echo REDIS_PORT=${REDIS_PORT} >> .env
-  #           echo REDIS_DB=${REDIS_DB} >> .env
-  #           echo REDIRECTION_BASE_URL=${REDIRECTION_BASE_URL} >> .env
-  #           echo SHORT_URL_TTL=${SHORT_URL_TTL} >> .env
-
 
 workflows:
   full:
     jobs:
-      - build
+      - tests
