@@ -33,8 +33,7 @@ jobs:
       - run:
           name: Running tests...
           command: |
-            ls -a
-            docker compose run shortitpy-api ls -a
+            cat .env
             docker compose run shortitpy-api pytest shortitpy
             docker compose run shortitpy-api pytest shortitpy --integration
             docker-compose down
