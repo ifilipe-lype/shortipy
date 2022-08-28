@@ -35,7 +35,7 @@ jobs:
           command: |
             docker-compose run shortitpy-api pytest shortitpy --integration
 
-  push-img-docker-hub:
+  deploy-docker-hub:
     <<: *base_config
 
     steps:
@@ -44,6 +44,7 @@ jobs:
       - run:
           name: Building Application Docker image
           command: |
+            sleep 3
             docker build .
 
       - run:
@@ -64,13 +65,12 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/shortitpy:$latest
 
 workflows:
-  unit-integration-tests:
+  build-test-deploy:
     jobs:
       - tests
-
-  push-to-docker-hub:
-    jobs:
-      - push-img-docker-hub:
+      - deploy-docker-hub:
+          requires:
+            - tests
           filters:
             branches:
               only:
