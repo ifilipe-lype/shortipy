@@ -33,6 +33,7 @@ jobs:
       - run:
           name: Running tests...
           command: |
+            docker-compose run shortitpy-api cat .env
             docker-compose run shortitpy-api pytest shortitpy
             docker-compose run shortitpy-api pytest shortitpy --integration
             docker-compose down

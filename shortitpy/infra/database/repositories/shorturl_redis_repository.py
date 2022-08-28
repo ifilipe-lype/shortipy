@@ -13,13 +13,7 @@ load_dotenv()
 class ShortURLsRedisRepository(ShortURLsRepository):
     def __init__(self) -> None:
         super().__init__()
-        print({
-            "host": os.environ.get('REDIS_NETWORK_NAME'),
-              "password": os.environ.get('REDIS_PASSWORD'),
-              "port": os.environ.get('REDIS_PORT'),
-              "db": os.environ.get('REDIS_DB'),
-              "decode_responses": True
-              })
+
         self._repo = redis.Redis(
             host=os.environ.get('REDIS_NETWORK_NAME'),
             password=os.environ.get('REDIS_PASSWORD'),
