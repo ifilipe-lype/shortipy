@@ -40,12 +40,14 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+          version: 20.10.12
 
       - run:
           name: Building Application Docker image
           command: |
-            sleep 3
-            docker build .
+            docker build . -t shortitpy
 
       - run:
           name: Login to Docker Hub
