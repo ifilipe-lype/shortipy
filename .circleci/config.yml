@@ -33,10 +33,9 @@ jobs:
       - run:
           name: Running tests...
           command: |
-            docker compose run shortitpy-api pwd
             docker compose run shortitpy-api ls -a
-            docker compose run shortitpy-api pytest ./shortitpy
-            docker compose run shortitpy-api pytest ./shortitpy --integration
+            docker compose run shortitpy-api pytest shortitpy
+            docker compose run shortitpy-api pytest shortitpy --integration
             docker-compose down
 
       # Store shortitpy files for the next job
