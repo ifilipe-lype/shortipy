@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true # should not be important
+          docker_layer_caching: false
           version: 20.10.12
 
       - run:
@@ -21,7 +21,7 @@ jobs:
             sudo apt-get update && sudo apt-get install python3-pip
 
       - run:
-          name: Gathering .env file data
+          name: Building .env file
           command: |
             echo REDIS_NETWORK_NAME=${REDIS_NETWORK_NAME} >> .env
             echo REDIS_PASSWORD=${REDIS_PASSWORD} >> .env
@@ -33,7 +33,6 @@ jobs:
       - run:
           name: Running tests...
           command: |
-            docker-compose run shortitpy-api cat .env
             docker-compose run shortitpy-api pytest shortitpy
             docker-compose run shortitpy-api pytest shortitpy --integration
             docker-compose down
@@ -62,14 +61,6 @@ jobs:
   #           echo REDIRECTION_BASE_URL=${REDIRECTION_BASE_URL} >> .env
   #           echo SHORT_URL_TTL=${SHORT_URL_TTL} >> .env
 
-  #     - run:
-  #         name: Running tests...
-  #         command: |
-  #           sudo dockerd
-  #           docker-compose -f docker-compose.dev.yml up -d
-  #           docker-compose -f docker-compose.dev.yml run shortitpy-api pytest shortitpy
-  #           docker-compose -f docker-compose.dev.yml run shortitpy-api pytest shortitpy --integration
-  #           docker-compose -f docker-compose.dev.yml down
 
 workflows:
   full:
