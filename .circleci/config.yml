@@ -77,4 +77,4 @@ workflows:
               only:
                 - main
           requires:
-            - unit-integration-tests
+            - tests
