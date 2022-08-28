@@ -70,10 +70,8 @@ workflows:
 
   push-to-docker-hub:
     jobs:
-      - build-application-image:
+      - push-img-docker-hub:
           filters:
             branches:
               only:
                 - main
-          requires:
-            - push-img-docker-hub
