@@ -13,7 +13,13 @@ load_dotenv()
 class ShortURLsRedisRepository(ShortURLsRepository):
     def __init__(self) -> None:
         super().__init__()
-
+        print({
+            "host": os.environ.get('REDIS_NETWORK_NAME'),
+              "password": os.environ.get('REDIS_PASSWORD'),
+              "port": os.environ.get('REDIS_PORT'),
+              "db": os.environ.get('REDIS_DB'),
+              "decode_responses": True
+              })
         self._repo = redis.Redis(
             host=os.environ.get('REDIS_NETWORK_NAME'),
             password=os.environ.get('REDIS_PASSWORD'),
@@ -33,9 +39,8 @@ class ShortURLsRedisRepository(ShortURLsRepository):
             # Set short_url time to live
             self._repo.expire(name=short_url.access_key, time=os.environ.get('SHORT_URL_TTL'))
             return short_url
-        
-        return None
 
+        return None
 
     async def getByAccessKey(self, access_key: str) -> ShortURL:
         short_url = self._repo.hgetall(name=access_key)
