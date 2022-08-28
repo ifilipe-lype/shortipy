@@ -72,9 +72,9 @@ workflows:
   push-to-docker-hub:
     jobs:
       - push-img-docker-hub:
+          requires:
+            - tests
           filters:
             branches:
               only:
                 - main
-          requires:
-            - tests
