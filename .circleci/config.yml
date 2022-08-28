@@ -58,13 +58,13 @@ jobs:
           name: Tags local application with last commit hash and latest
           command: |
             docker tag shortitpy $DOCKER_HUB_USER_ID/shortitpy:$CIRCLE_SHA1
-            docker tag shortitpy $DOCKER_HUB_USER_ID/shortitpy:$latest
+            docker tag shortitpy $DOCKER_HUB_USER_ID/shortitpy:latest
 
       - run:
           name: Push local application image to Docker Hub
           command: |
             docker push $DOCKER_HUB_USER_ID/shortitpy:$CIRCLE_SHA1
-            docker push $DOCKER_HUB_USER_ID/shortitpy:$latest
+            docker push $DOCKER_HUB_USER_ID/shortitpy:latest
 
 workflows:
   build-test-deploy:
